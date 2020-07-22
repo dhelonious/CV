@@ -1,5 +1,8 @@
 A curriculum vitae LuaLaTeX document class
 
+.. image:: screenshot.png
+  :alt: screenshot
+
 The ``vita`` class
 ==================
 
