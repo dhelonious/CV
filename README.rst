@@ -11,7 +11,7 @@ This document class is based on `twentysecondcv`_ and is heavily inspired by `Bo
 Alternative style
 =================
 
-This style resembles the look `twentysecondcv`_:
+This style resembles the look of `twentysecondcv`_:
 
 .. code-block:: latex
 
