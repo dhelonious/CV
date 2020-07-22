@@ -1,0 +1,33 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hyphen}[2019/10/03 1.0 Hyphenate even words containing hyphens]
+
+\RequirePackage{luatexbase}
+\RequirePackage{luacode}
+
+\begin{luacode}
+   function hyphenate_always(head, tail)
+      local n = head
+      while n do
+         if node.type(n.id) == 'glyph' and n.char == string.byte('-') then
+            --% Insert an infinite penalty before, and a zero-width glue node after, the hyphen.
+            --% Like writing "\\nobreak-\\hspace{0pt}" or equivalently "\\penalty10000-\\hskip0pt"
+            if not(n.prev ~= nil and node.type(n.prev.id) == 'glyph' and n.prev.char == string.byte('-')) then
+               local p = node.new(node.id('penalty'))
+               p.penalty = 10000
+               head, p = node.insert_before(head, n, p)
+            end
+            if not(n.next ~= nil and node.type(n.next.id) == 'glyph' and n.next.char == string.byte('-')) then
+               local g = node.new(node.id('glue'))
+               head, g = node.insert_after(head, n, g)
+               n = g
+            end
+         end
+         n = n.next
+      end
+      lang.hyphenate(head, tail)
+   end
+
+   luatexbase.add_to_callback('hyphenate', hyphenate_always, 'Hyphenate even words containing hyphens')
+\end{luacode}
+
+\endinput

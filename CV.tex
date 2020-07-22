@@ -1,0 +1,123 @@
+\documentclass[
+  name = Sherlock,
+  family = Holmes,
+  pic = Graphics/photo.png,
+  profession = Consulting\ Detective,
+  date = 06.01.1854,
+  street = 221b\ Baker\ St.,
+  % number = 221b,
+  city = London,
+  % zip = NW1\ 6XE,
+  % country = Great Britain,
+  web = http://www.sherlock-holmes.co.uk/,
+]{vita}
+
+\usepackage{fontspec}
+\usepackage[ngerman, british]{babel}
+\usepackage[style=english, english=american]{csquotes}
+\usepackage[
+  backend = biber,
+  bibencoding = utf8,
+  style = phys,
+]{biblatex}
+
+\usepackage{biblatex-ext-tabular}
+\usepackage{booktabs}
+
+\usepackage{microtype}
+\usepackage{hyphen}
+
+% Settings
+
+\DeclareFieldFormat*{titlecase}{#1}
+
+\addbibresource{CV.bib}
+
+% Commands
+
+\NewDocumentCommand\german{ m }
+  {\begin{otherlanguage*}{ngerman}#1\end{otherlanguage*}}
+
+\defbibtabular{bibtabular}{\begingroup%
+  \setlength\parskip{5pt}%
+  \setlength\tabcolsep{0pt}%
+  \renewcommand\arraystretch{1.1}%
+   \begin{tabular}{p{1.2cm}p{12cm}}}
+  {\end{tabular}\endgroup}
+  {\vitabadge{\plainlang{\thefield{year}}}
+   & {\plainlang{\usebibmacro{title}}\hfill%
+    \mbox{\textcolor{black!80}{\plainlang{%
+      \usebibmacro{journal} \thefield{volume}}}}} \\}
+
+\DeclareSortingScheme{dyt}{
+  \sort[direction=descending]{\field{year}}
+  \sort{\field{title}}
+}
+
+% ----------------------------------- Skills -----------------------------------
+
+\vitaskills[Languages]{
+  {English/10},
+  {German/9},
+  {French/9},
+  {Spanish/5},
+  {Norwegian/7},
+  {Tibetan/5},
+  {Latin/5}%
+}
+
+\vitaskills[Limits]{%
+  {Knowledge of Literature/0},
+  {Knowledge of Philosophy/0},
+  {Knowledge of Astronomy/0},
+  {Knowledge of Politics/3},
+  {Knowledge of Botany/5},
+  {Knowledge of Geology/7},
+  {Knowledge of Chemistry/10},
+  {Knowledge of Anatomy/9},
+  {Knowledge of Sensational Literature/10},
+  {Knowledge of British Law/7},
+  {Violin play/10},
+  {Singlestick/8},
+  {Boxing/8},
+  {Swordsmanship/8}%
+}
+
+\begin{document}
+
+% ----------------------------------- About ------------------------------------
+
+\vitasection{About Me}
+
+I am the most incurably lazy devil that ever stood in shoe leather {--} that is, when the fit is on me, for I can be spry enough at times.
+
+% --------------------------------- Profession ---------------------------------
+
+\vitasection{Profession}
+
+Well, I have a trade of my own. I suppose I am the only one in the world. I am a consulting detective, if you can understand what that is. Here in London we have lots of Government detectives and lots of private ones. When these fellows are at fault they come to me, and I manage to put them on the right scent. They lay all the evidence before me, and I am generally able, by the help of my knowledge of the history of crime, to set them straight. There is a strong family resemblance about misdeeds, and if you have all the details of a thousand at your finger ends, it is odd if you cannot unravel the thousand and first. Lestrade is a well-known detective. He got himself into a fog recently over a forgery case, and that was what brought him here.
+
+% ------------------------------------ Life ------------------------------------
+
+\vitasection{Life}
+
+\begin{vitalist}
+
+  \vitaitem{since 1904}{Retirement to Sussex}
+  \vitaitem{1894--1904}{Return to active practice}
+  \vitaitem{1878--1891}{Breaking up of Prof.\ Moriarty's criminal organisation}
+  \vitaitem{since 1882}{Partnership with Dr.\ John H.\ Watson}
+  \vitaitem{since 1878}{Consulting detective}
+
+\end{vitalist}
+
+% -------------------------------- Publications --------------------------------
+
+\vitasection{Publications}
+
+\nocite{*}
+\newrefcontext[sorting=dyt]
+\printbibtabular[heading=none]
+
+\end{document}
+
